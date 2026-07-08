@@ -1,0 +1,481 @@
+/* ============================================================
+   AI-Powered Student Study Assistant
+   Custom Stylesheet
+   ============================================================ */
+
+/* General Body Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #1a1a2e;
+    position: relative;
+}
+
+main {
+    flex: 1;
+    position: relative;
+    z-index: 2;
+}
+
+/* ============================================================
+   SLIDING BACKGROUND SLIDESHOW
+   Uses 6 online images with CSS keyframe crossfade animation.
+   Each image fades in and out over a 36-second cycle.
+   ============================================================ */
+.bg-slideshow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.bg-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    animation: slideFade 36s infinite;
+}
+
+/* Image 1: Students studying in library */
+.bg-slide-1 {
+    background-image: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1920&q=80');
+    animation-delay: 0s;
+}
+
+/* Image 2: Laptop with books - study desk */
+.bg-slide-2 {
+    background-image: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1920&q=80');
+    animation-delay: 6s;
+}
+
+/* Image 3: Open book in bright space */
+.bg-slide-3 {
+    background-image: url('https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1920&q=80');
+    animation-delay: 12s;
+}
+
+/* Image 4: University campus / classroom */
+.bg-slide-4 {
+    background-image: url('https://images.unsplash.com/photo-1519452635265-7b1fbfd1e4e0?w=1920&q=80');
+    animation-delay: 18s;
+}
+
+/* Image 5: Person writing notes */
+.bg-slide-5 {
+    background-image: url('https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=1920&q=80');
+    animation-delay: 24s;
+}
+
+/* Image 6: Technology and education */
+.bg-slide-6 {
+    background-image: url('https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1920&q=80');
+    animation-delay: 30s;
+}
+
+/* Crossfade animation: each slide visible for 6s, fades in 2s and out 2s */
+@keyframes slideFade {
+    0%   { opacity: 0; transform: scale(1); }
+    3%   { opacity: 1; }
+    14%  { opacity: 1; transform: scale(1.05); }
+    17%  { opacity: 0; transform: scale(1.05); }
+    100% { opacity: 0; transform: scale(1); }
+}
+
+/* Dark overlay so text is readable over images */
+.bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.65);
+    z-index: 1;
+}
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+.navbar {
+    position: relative;
+    z-index: 10;
+}
+
+.navbar-brand {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.navbar-brand i {
+    font-size: 1.4rem;
+}
+
+.nav-link {
+    margin-left: 10px;
+    font-weight: 500;
+}
+
+.nav-link i {
+    margin-right: 3px;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}
+
+/* ============================================================
+   HOME PAGE - Hero Section
+   ============================================================ */
+.hero-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    padding: 60px 30px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 400px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+}
+
+.hero-section::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -10%;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-icon-wrapper {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    padding: 20px;
+}
+
+.hero-main-icon {
+    font-size: 3.5rem;
+    color: white;
+}
+
+.hero-title {
+    color: white;
+    margin-bottom: 15px;
+}
+
+.hero-subtitle {
+    color: rgba(255, 255, 255, 0.85) !important;
+    max-width: 600px;
+    font-size: 1.15rem;
+}
+
+.hero-stats {
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 30px;
+    padding: 8px 18px;
+    font-size: 0.9rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.stat-item i {
+    font-size: 1rem;
+}
+
+.hero-section .btn-primary {
+    background: white;
+    color: #667eea;
+    border: none;
+    font-weight: 600;
+}
+
+.hero-section .btn-primary:hover {
+    background: #f0f0f0;
+    color: #5a3e9e;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================================
+   HOME PAGE - Feature Cards
+   ============================================================ */
+.feature-card {
+    border-radius: 16px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.feature-icon-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-icon-circle i {
+    font-size: 1.8rem;
+}
+
+/* ============================================================
+   HOME PAGE - How It Works
+   ============================================================ */
+.how-it-works {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+}
+
+.how-it-works h3,
+.how-it-works h6 {
+    color: #1a1a2e !important;
+}
+
+.how-it-works .text-muted {
+    color: #555 !important;
+}
+
+.step-number {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+/* ============================================================
+   CHATBOT PAGE
+   ============================================================ */
+.chat-container {
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    overflow: hidden;
+    background: white;
+}
+
+.chat-box {
+    height: 400px;
+    overflow-y: auto;
+    padding: 20px;
+    background-color: #f0f4f8;
+}
+
+.message {
+    margin-bottom: 12px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    max-width: 80%;
+    word-wrap: break-word;
+    white-space: pre-line;
+}
+
+.user-message {
+    background-color: #007bff;
+    color: white;
+    margin-left: auto;
+    text-align: right;
+}
+
+.bot-message {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    margin-right: auto;
+}
+
+.chat-input-area {
+    padding: 15px;
+    background-color: white;
+    border-top: 1px solid #dee2e6;
+}
+
+/* ============================================================
+   PLANNER PAGE - Schedule Cards
+   ============================================================ */
+.schedule-card {
+    border-radius: 10px;
+    transition: transform 0.2s ease;
+}
+
+.schedule-card:hover {
+    transform: scale(1.02);
+}
+
+/* ============================================================
+   QUIZ PAGE
+   ============================================================ */
+.quiz-question-card {
+    border-left: 4px solid #ffc107;
+    transition: border-color 0.2s;
+}
+
+.quiz-question-card:hover {
+    border-left-color: #007bff;
+}
+
+.form-check {
+    padding: 8px 8px 8px 35px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+.form-check:hover {
+    background-color: #f0f4f8;
+}
+
+/* ============================================================
+   SUMMARIZER PAGE
+   ============================================================ */
+.summary-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 150px;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(5px);
+}
+
+/* ============================================================
+   CONTENT CARDS (Global - makes all cards readable over bg)
+   ============================================================ */
+.card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+}
+
+.alert {
+    backdrop-filter: blur(5px);
+}
+
+/* Page headings over background */
+main > h2, main > p.text-muted {
+    color: white !important;
+}
+
+main > p.text-muted {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Keep text inside cards dark */
+.card h2, .card h3, .card h4, .card h5, .card h6,
+.card p, .card label, .card .form-text {
+    color: #212529 !important;
+}
+
+.card .text-muted {
+    color: #6c757d !important;
+}
+
+/* ============================================================
+   UTILITY / RESPONSIVE
+   ============================================================ */
+.btn-lg {
+    padding: 12px 30px;
+}
+
+/* Custom scrollbar for chat */
+.chat-box::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-box::-webkit-scrollbar-track {
+    background: #f0f4f8;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+    background: #bbb;
+    border-radius: 3px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 40px 20px;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-main-icon {
+        font-size: 2.5rem;
+    }
+
+    .chat-box {
+        height: 300px;
+    }
+
+    .message {
+        max-width: 95%;
+    }
+
+    .feature-icon-circle {
+        width: 55px;
+        height: 55px;
+    }
+
+    .feature-icon-circle i {
+        font-size: 1.4rem;
+    }
+
+    .stat-item {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+}

@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}Study Assistant - Quiz{% endblock %}
+
+{% block content %}
+<h2 class="mb-4"><i class="bi bi-patch-question-fill me-2"></i>Quiz Generator</h2>
+
+<!-- Error Message -->
+{% if error %}
+<div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+
+<!-- ========== QUIZ START SCREEN ========== -->
+{% if not taking_quiz and not show_results %}
+<p class="text-muted">Test your knowledge! Choose a topic and number of questions to get started.</p>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form method="POST" action="{{ url_for('quiz_start') }}">
+            <div class="mb-3">
+                <label for="topic" class="form-label"><strong>Select Topic</strong></label>
+                <select class="form-select" id="topic" name="topic" required>
+                    <option value="" disabled selected>Choose a topic...</option>
+                    {% for topic in topics %}
+                    <option value="{{ topic }}">{{ topic }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="num_questions" class="form-label"><strong>Number of Questions</strong></label>
+                <select class="form-select" id="num_questions" name="num_questions">
+                    <option value="3">3 Questions (Quick)</option>
+                    <option value="5" selected>5 Questions (Standard)</option>
+                    <option value="7">7 Questions (Challenge)</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-warning btn-lg">Start Quiz</button>
+        </form>
+    </div>
+</div>
+{% endif %}
+
+<!-- ========== TAKING QUIZ ========== -->
+{% if taking_quiz %}
+<div class="alert alert-info">
+    <strong>Topic:</strong> {{ topic }} | <strong>Questions:</strong> {{ questions|length }}
+</div>
+
+<form method="POST" action="{{ url_for('quiz_submit') }}">
+    {% for q in questions %}
+    {% set i = loop.index0 %}
+    <div class="card mb-3 quiz-question-card">
+        <div class="card-body">
+            <h5 class="card-title">Question {{ loop.index }}</h5>
+            <p class="card-text">{{ q.question }}</p>
+
+            {% for option in q.options %}
+            <div class="form-check">
+                <input class="form-check-input" type="radio"
+                       name="question_{{ i }}" value="{{ option }}"
+                       id="q{{ i }}_{{ loop.index }}" required>
+                <label class="form-check-label" for="q{{ i }}_{{ loop.index }}">
+                    {{ option }}
+                </label>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-success btn-lg">Submit Answers</button>
+</form>
+{% endif %}
+
+<!-- ========== QUIZ RESULTS ========== -->
+{% if show_results %}
+<div class="card shadow-sm mb-4">
+    <div class="card-body text-center">
+        <h3>Quiz Results: {{ topic }}</h3>
+        <div class="display-4 my-3
+            {% if percentage >= 70 %}text-success
+            {% elif percentage >= 50 %}text-warning
+            {% else %}text-danger{% endif %}">
+            {{ score }}/{{ total }}
+        </div>
+        <p class="lead">You scored <strong>{{ percentage }}%</strong></p>
+
+        {% if percentage >= 70 %}
+        <p class="text-success">Great job! You have a solid understanding of this topic!</p>
+        {% elif percentage >= 50 %}
+        <p class="text-warning">Good effort! Review the questions you missed and try again.</p>
+        {% else %}
+        <p class="text-danger">Keep studying! Review the material and take the quiz again.</p>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Detailed Results -->
+<h4 class="mb-3">Answer Breakdown</h4>
+{% for result in results %}
+<div class="card mb-2 {{ 'border-success' if result.is_correct else 'border-danger' }}">
+    <div class="card-body">
+        <strong>Question {{ result.question_num }}:</strong>
+        {% if result.is_correct %}
+        <span class="badge bg-success">Correct</span>
+        {% else %}
+        <span class="badge bg-danger">Incorrect</span>
+        <br><small class="text-muted">Your answer: {{ result.submitted if result.submitted else 'No answer' }}</small>
+        <br><small class="text-success">Correct answer: {{ result.correct }}</small>
+        {% endif %}
+    </div>
+</div>
+{% endfor %}
+
+<a href="{{ url_for('quiz') }}" class="btn btn-warning mt-3">Take Another Quiz</a>
+{% endif %}
+{% endblock %}

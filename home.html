@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block title %}Study Assistant - Home{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section text-center py-5 mb-5">
+    <div class="hero-content">
+        <div class="hero-icon-wrapper mb-4">
+            <i class="bi bi-mortarboard-fill hero-main-icon"></i>
+        </div>
+        <h1 class="display-3 fw-bold hero-title">AI-Powered Study Assistant</h1>
+        <p class="lead text-muted mx-auto hero-subtitle">
+            Your intelligent study companion. Four powerful tools designed to help you
+            study smarter, stay organized, and achieve better results.
+        </p>
+        <div class="hero-stats d-flex justify-content-center gap-4 mt-4">
+            <div class="stat-item">
+                <i class="bi bi-lightning-charge-fill text-warning"></i>
+                <span>4 Smart Tools</span>
+            </div>
+            <div class="stat-item">
+                <i class="bi bi-cloud-check-fill text-success"></i>
+                <span>No Sign-up</span>
+            </div>
+            <div class="stat-item">
+                <i class="bi bi-shield-check text-primary"></i>
+                <span>100% Free</span>
+            </div>
+        </div>
+        <a href="#features" class="btn btn-primary btn-lg mt-4 px-5">
+            <i class="bi bi-arrow-down-circle me-2"></i>Explore Tools
+        </a>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="mb-5">
+    <div class="text-center mb-4">
+        <h2 class="fw-bold"><i class="bi bi-grid-fill me-2"></i>Our Features</h2>
+        <p class="text-muted">Choose a tool to get started</p>
+    </div>
+
+    <div class="row g-4">
+        <!-- Chatbot Card -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card feature-card h-100 shadow-sm border-0">
+                <div class="card-body text-center p-4">
+                    <div class="feature-icon-circle bg-primary-subtle mb-3 mx-auto">
+                        <i class="bi bi-chat-dots-fill text-primary"></i>
+                    </div>
+                    <h5 class="card-title fw-bold">Study Chatbot</h5>
+                    <p class="card-text text-muted">Get instant study tips, exam strategies, and motivational advice from your AI assistant.</p>
+                    <a href="{{ url_for('chatbot') }}" class="btn btn-primary w-100">
+                        <i class="bi bi-chat-left-text me-1"></i> Start Chatting
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Planner Card -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card feature-card h-100 shadow-sm border-0">
+                <div class="card-body text-center p-4">
+                    <div class="feature-icon-circle bg-success-subtle mb-3 mx-auto">
+                        <i class="bi bi-calendar2-week-fill text-success"></i>
+                    </div>
+                    <h5 class="card-title fw-bold">Study Planner</h5>
+                    <p class="card-text text-muted">Generate a balanced schedule based on your subjects, hours, and available days.</p>
+                    <a href="{{ url_for('planner') }}" class="btn btn-success w-100">
+                        <i class="bi bi-calendar-plus me-1"></i> Create Plan
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Card -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card feature-card h-100 shadow-sm border-0">
+                <div class="card-body text-center p-4">
+                    <div class="feature-icon-circle bg-warning-subtle mb-3 mx-auto">
+                        <i class="bi bi-patch-question-fill text-warning"></i>
+                    </div>
+                    <h5 class="card-title fw-bold">Quiz Generator</h5>
+                    <p class="card-text text-muted">Test your knowledge with randomized multiple-choice quizzes across topics.</p>
+                    <a href="{{ url_for('quiz') }}" class="btn btn-warning w-100">
+                        <i class="bi bi-pencil-square me-1"></i> Take Quiz
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summarizer Card -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card feature-card h-100 shadow-sm border-0">
+                <div class="card-body text-center p-4">
+                    <div class="feature-icon-circle bg-info-subtle mb-3 mx-auto">
+                        <i class="bi bi-file-earmark-text-fill text-info"></i>
+                    </div>
+                    <h5 class="card-title fw-bold">Text Summarizer</h5>
+                    <p class="card-text text-muted">Paste long text and get a concise summary highlighting the most important points.</p>
+                    <a href="{{ url_for('summarizer') }}" class="btn btn-info w-100">
+                        <i class="bi bi-scissors me-1"></i> Summarize
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="how-it-works py-5 px-4 mb-4 rounded-4">
+    <h3 class="text-center fw-bold mb-4">
+        <i class="bi bi-gear-wide-connected me-2"></i>How It Works
+    </h3>
+    <div class="row g-4">
+        <div class="col-md-6 col-lg-3">
+            <div class="d-flex align-items-start gap-3">
+                <div class="step-number">1</div>
+                <div>
+                    <h6 class="fw-bold mb-1">Choose a Tool</h6>
+                    <p class="text-muted small mb-0">Pick from Chatbot, Planner, Quiz, or Summarizer above.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="d-flex align-items-start gap-3">
+                <div class="step-number">2</div>
+                <div>
+                    <h6 class="fw-bold mb-1">Provide Input</h6>
+                    <p class="text-muted small mb-0">Enter your subjects, questions, or text depending on the tool.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="d-flex align-items-start gap-3">
+                <div class="step-number">3</div>
+                <div>
+                    <h6 class="fw-bold mb-1">AI Processes</h6>
+                    <p class="text-muted small mb-0">Our algorithms analyze your input using smart techniques.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="d-flex align-items-start gap-3">
+                <div class="step-number">4</div>
+                <div>
+                    <h6 class="fw-bold mb-1">Get Results</h6>
+                    <p class="text-muted small mb-0">Receive personalized advice, schedules, scores, or summaries.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Tech Section -->
+<section class="text-center py-4">
+    <p class="text-muted small">
+        <i class="bi bi-cpu me-1"></i> Built with Python + Flask |
+        <i class="bi bi-braces me-1"></i> Pure Python AI Logic |
+        <i class="bi bi-palette me-1"></i> Bootstrap 5 |
+        <i class="bi bi-stars me-1"></i> Bootstrap Icons
+    </p>
+</section>
+{% endblock %}

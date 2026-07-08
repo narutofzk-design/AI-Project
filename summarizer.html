@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Study Assistant - Summarizer{% endblock %}
+
+{% block content %}
+<h2 class="mb-4"><i class="bi bi-file-earmark-text-fill me-2"></i>Text Summarizer</h2>
+<p class="text-muted">Paste a long text below and get a concise summary of the most important sentences.</p>
+
+<!-- Error Message -->
+{% if error %}
+<div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+
+<!-- Input Form -->
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <form method="POST" action="{{ url_for('summarizer_generate') }}">
+            <div class="mb-3">
+                <label for="text" class="form-label"><strong>Enter Text to Summarize</strong></label>
+                <textarea class="form-control" id="text" name="text" rows="8"
+                          placeholder="Paste your text here... (at least 3 sentences for best results)"
+                          required>{{ original_text if original_text else '' }}</textarea>
+                <div class="form-text">The summarizer works best with paragraphs of 5+ sentences.</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="num_sentences" class="form-label"><strong>Summary Length</strong></label>
+                <select class="form-select" id="num_sentences" name="num_sentences" style="max-width: 300px;">
+                    <option value="2" {{ 'selected' if num_sentences == 2 else '' }}>2 sentences (Very brief)</option>
+                    <option value="3" {{ 'selected' if num_sentences == 3 or not num_sentences else '' }}>3 sentences (Standard)</option>
+                    <option value="5" {{ 'selected' if num_sentences == 5 else '' }}>5 sentences (Detailed)</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-info btn-lg">Summarize</button>
+        </form>
+    </div>
+</div>
+
+<!-- Summary Output -->
+{% if summary %}
+<div class="card shadow-sm border-info">
+    <div class="card-header bg-info text-white">
+        <strong>Summary Result</strong>
+    </div>
+    <div class="card-body">
+        <p class="card-text summary-text">{{ summary }}</p>
+    </div>
+    <div class="card-footer text-muted">
+        <small>
+            Original: ~{{ original_text.split()|length }} words |
+            Summary: ~{{ summary.split()|length }} words |
+            Reduction: {{ ((1 - summary.split()|length / original_text.split()|length) * 100)|round|int }}%
+        </small>
+    </div>
+</div>
+{% endif %}
+
+<!-- Example Text (for demo purposes) -->
+<div class="mt-4">
+    <details>
+        <summary class="text-muted" style="cursor: pointer;"><small>Click for sample text to try</small></summary>
+        <div class="mt-2 p-3 bg-light rounded">
+            <small id="sampleText">Machine learning is a subset of artificial intelligence that focuses on building systems that learn from data. Unlike traditional programming where rules are explicitly coded, machine learning algorithms identify patterns in data and make decisions with minimal human intervention. The field has grown rapidly in recent years due to increases in computing power and available data. Deep learning, a subset of machine learning, uses neural networks with many layers to analyze complex patterns. Applications of machine learning include image recognition, natural language processing, and recommendation systems. Companies like Google, Amazon, and Netflix use machine learning extensively in their products. The technology continues to evolve, with new breakthroughs being announced regularly in academic research.</small>
+            <br><br>
+            <button class="btn btn-sm btn-outline-secondary" onclick="document.getElementById('text').value = document.getElementById('sampleText').textContent;">
+                Use this text
+            </button>
+        </div>
+    </details>
+</div>
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Study Assistant - Planner{% endblock %}
+
+{% block content %}
+<h2 class="mb-4"><i class="bi bi-calendar2-week-fill me-2"></i>Study Planner</h2>
+<p class="text-muted">Enter your subjects and available time to generate a personalized study schedule.</p>
+
+<!-- Error Message -->
+{% if error %}
+<div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+
+<!-- Planner Form -->
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <form method="POST" action="{{ url_for('planner_generate') }}">
+            <div class="mb-3">
+                <label for="subjects" class="form-label"><strong>Subjects</strong> (comma-separated)</label>
+                <input type="text" class="form-control" id="subjects" name="subjects"
+                       placeholder="e.g., Math, Science, English, History"
+                       value="{{ subjects if subjects else '' }}" required>
+                <div class="form-text">Enter the subjects you need to study, separated by commas.</div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="total_hours" class="form-label"><strong>Total Study Hours</strong></label>
+                    <input type="number" class="form-control" id="total_hours" name="total_hours"
+                           min="1" max="100" value="{{ total_hours if total_hours else '10' }}" required>
+                    <div class="form-text">How many total hours can you dedicate?</div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="days" class="form-label"><strong>Number of Days</strong></label>
+                    <input type="number" class="form-control" id="days" name="days"
+                           min="1" max="30" value="{{ days if days else '7' }}" required>
+                    <div class="form-text">Over how many days do you want to spread your study?</div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-success btn-lg">Generate Study Plan</button>
+        </form>
+    </div>
+</div>
+
+<!-- Generated Schedule Display -->
+{% if schedule %}
+<div class="mt-4">
+    <h3 class="mb-3">Your Study Schedule</h3>
+    <div class="alert alert-info">
+        <strong>Summary:</strong> Studying {{ subjects }} over {{ days }} days with {{ total_hours }} total hours.
+    </div>
+
+    <div class="row">
+        {% for day, tasks in schedule.items() %}
+        <div class="col-md-6 col-lg-4 mb-3">
+            <div class="card schedule-card">
+                <div class="card-header bg-primary text-white">
+                    <strong>Day {{ day }}</strong>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        {% for task in tasks %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>{{ task.subject }}</strong><br>
+                                <small class="text-muted">{{ task.time_block }}</small>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">{{ task.hours }}h</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% endblock %}
